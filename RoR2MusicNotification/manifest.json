@@ -1,9 +1,9 @@
 ﻿{
-  "name": "TestMod",
-  "version_number": "1.1.0",
-  "website_url": "https://github.com/thunderstore-io",
-  "description": "This is a description for a mod. 250 characters max",
+  "name": "MusicDisplay",
+  "version_number": "1.0.0",
+  "website_url": "https://github.com/DestroyedClone/RoR2MusicDisplay",
+  "description": "Adds a persistent text element on screen to show the current track that's playing.",
   "dependencies": [
-    "MythicManiac-TestMod-1.1.0"
+    "bbepis-BepInExPack-5.4.2114"
   ]
 }
