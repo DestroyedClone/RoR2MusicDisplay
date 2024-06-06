@@ -72,7 +72,7 @@ namespace RoR2MusicNotification
         private void MusicTrackDef_Play(On.RoR2.MusicTrackDef.orig_Play orig, MusicTrackDef self)
         {
             orig(self);
-            //Logger.LogMessage($"Now Playing: {self.cachedName} = {GetTrackName(self.cachedName)}");
+            //Logger.LogMessage($"Now Playing: {self.cachedName} = {GetTrackInfo(self.cachedName)}");
             if (!notif)
             {
                 var userCanvas = AchievementNotificationPanel.GetUserCanvas(LocalUserManager.GetFirstLocalUser());
@@ -82,14 +82,9 @@ namespace RoR2MusicNotification
                 notif.name = "MusicNameDisplay";
             }
             //notif.AddComponent<FadeOutText>().textMesh = notif.GetComponent<HGTextMeshProUGUI>();
-            string artistName = "\nChris Christodoulou";
-            if (self.cachedName == "muNone")
-            {
-                artistName = string.Empty;
-            }
 
             notifTextMesh = notif.GetComponent<HGTextMeshProUGUI>();
-            notifTextMesh.text = GetTrackName(self.cachedName) + artistName;
+            notifTextMesh.text = GetTrackInfo(self.cachedName);
             SetNotifAlignment();
             SetNotifPosition();
             SetNotifScale();
@@ -113,11 +108,13 @@ namespace RoR2MusicNotification
             notif.transform.localScale = Vector3.one * ModConfig.cfgScale.Value;
         }
 
-        public static string GetTrackName(string trackDefName)
+        public static string GetTrackInfo(string trackDefName)
         {
             if (trackNames.TryGetValue(trackDefName, out var trackName))
             {
-                return trackName;
+                if (trackName == "muNone")
+                    return string.Empty;
+                return trackName + "\nChris Christodoulou";
             }
             return trackDefName;
         }
