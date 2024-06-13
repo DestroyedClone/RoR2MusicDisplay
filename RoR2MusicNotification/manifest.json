@@ -1,6 +1,6 @@
 ﻿{
   "name": "MusicDisplay",
-  "version_number": "1.0.0",
+  "version_number": "1.0.0001",
   "website_url": "https://github.com/DestroyedClone/RoR2MusicDisplay",
   "description": "Adds a persistent text element on screen to show the current track that's playing.",
   "dependencies": [

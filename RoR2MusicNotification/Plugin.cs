@@ -13,7 +13,7 @@ using UnityEngine;
 
 namespace RoR2MusicNotification
 {
-    [BepInPlugin("com.DestroyedClone.MusicDisplay", "Music Display", "1.0.0")]
+    [BepInPlugin("com.DestroyedClone.MusicDisplay", "Music Display", "1.0.0001")]
     [BepInDependency("com.rune580.riskofoptions", BepInDependency.DependencyFlags.SoftDependency)]
     public class Plugin : BaseUnityPlugin
     {
@@ -52,7 +52,7 @@ namespace RoR2MusicNotification
             {"muSong05", "Thermodynamic Equilibrium"},
             {"muSong08", "A Glacier Eventually Farts (And Don't You Listen to the Song of Life)"},
             {"muSong13", "The Raindrop that Fell to the Sky"},
-            {"muSong14", "The Rain Formerly KNown as Purple"},
+            {"muSong14", "The Rain Formerly Known as Purple"},
             {"muSong16", "Hydrophobia"},
             {"muSong21", "Petrichor V"},
             {"muSong22", "Köppen As Fuck"},
