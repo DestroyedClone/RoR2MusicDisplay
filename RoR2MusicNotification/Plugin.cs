@@ -1,6 +1,7 @@
 ﻿using BepInEx;
 using RoR2;
 using RoR2.UI;
+using System;
 using System.Collections.Generic;
 using System.Security;
 using System.Security.Permissions;
@@ -22,17 +23,35 @@ namespace RoR2MusicNotification
         public static HGTextMeshProUGUI notifTextMesh;
         public static GameObject ReferenceGameObject;
 
+        public static bool canLoad = false;
+        public static string currentlyPlaying = string.Empty;
+
         public void Awake()
         {
             RoR2MusicNotification.ModConfig.Initialize(Config);
 
             On.RoR2.MusicTrackDef.Play += MusicTrackDef_Play;
-            ReferenceGameObject = UnityEngine.AddressableAssets.Addressables.LoadAssetAsync<GameObject>("RoR2/Base/UI/HGCreditNameLabel.prefab").WaitForCompletion();
+            UnityEngine.AddressableAssets.Addressables.LoadAssetAsync<GameObject>("RoR2/Base/UI/HGCreditNameLabel.prefab").Completed += (obj) => { ReferenceGameObject = obj.Result; };
+            //MusicCatalogDumper.Hook();
+            RoR2Application.onLoad += OnLoad;
+        }
+
+        private void OnLoad()
+        {
+            canLoad = true;
+            CreateDisplay();
         }
 
         private void MusicTrackDef_Play(On.RoR2.MusicTrackDef.orig_Play orig, MusicTrackDef self)
         {
             orig(self);
+            currentlyPlaying = self.cachedName;
+            CreateDisplay();
+        }
+
+        private static void CreateDisplay()
+        {
+            if (!canLoad) return;
             //Logger.LogMessage($"Now Playing: {self.cachedName} = {GetTrackInfo(self.cachedName)}");
             if (!notif)
             {
@@ -45,7 +64,7 @@ namespace RoR2MusicNotification
             //notif.AddComponent<FadeOutText>().textMesh = notif.GetComponent<HGTextMeshProUGUI>();
 
             notifTextMesh = notif.GetComponent<HGTextMeshProUGUI>();
-            notifTextMesh.text = GetTrackInfo(self.cachedName);
+            notifTextMesh.text = GetTrackInfo(currentlyPlaying);
             SetNotifAlignment();
             SetNotifPosition();
             SetNotifScale();
@@ -54,18 +73,21 @@ namespace RoR2MusicNotification
         public static void SetNotifAlignment()
         {
             if (!notifTextMesh) return;
+            if (!canLoad) return;
             notifTextMesh.horizontalAlignment = ModConfig.cfgTextAlignment.Value;
         }
 
         public static void SetNotifPosition()
         {
             if (!Plugin.notif) return;
+            if (!canLoad) return;
             notif.transform.localPosition = new Vector3(ModConfig.cfgXHeight.Value, ModConfig.cfgYHeight.Value);
         }
 
         public static void SetNotifScale()
         {
             if (!Plugin.notif) return;
+            if (!canLoad) return;
             notif.transform.localScale = Vector3.one * ModConfig.cfgScale.Value;
         }
 
@@ -73,9 +95,12 @@ namespace RoR2MusicNotification
         {
             if (Data.trackNames.TryGetValue(trackDefName, out var trackName))
             {
-                if (trackName == "muNone")
-                    return string.Empty;
-                return trackName + "\nChris Christodoulou";
+                return trackDefName switch
+                {
+                    "muNone" => string.Empty,
+                    "muSong_LemurianTemple" => trackName + "\nStavros Markonis",
+                    _ => trackName + "\nChris Christodoulou",
+                };
             }
             return trackDefName;
         }

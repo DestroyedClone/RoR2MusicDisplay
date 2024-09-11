@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace RoR2MusicNotification
 {
     internal class Data
     {
-
         public static Dictionary<string, string> trackNames = new Dictionary<string, string>()
         {
             {"muBossfightDLC1_10", "Having Fallen, It Was Blood"},
@@ -22,8 +19,6 @@ namespace RoR2MusicNotification
             {"muGameplayDLC1_03", "Out of Whose Womb Came the Ice?"},
             {"muGameplayDLC1_06", "Who Can Fathom the Soundless Depths?"},
             {"muGameplayDLC1_08", "A Placid Island of Ignorance"},
-            {"muGameplayDLC2_01", "It Can't Rain All the Time"},
-            {"muGameplayDLC2_02", "A Tempestuous Noise of Thunder and Lightning Heard"},
             {"muIntroCutscene", "Through a Cloud, Darkly"},
             {"muLogbook", "The Dehydration of Risk of Rain 2"},
             {"muMainEndingFull", "Lacrimosum"},
@@ -44,6 +39,22 @@ namespace RoR2MusicNotification
             {"muSong23", "Antarctic Oscillation"},
             {"muSong24", "...con lentitud poderosa"},
             {"muSong25", "You're Gonna Need A Bigger Ukulele"},
+            {"muSong_Habitat", "Oṃ Maṇi Padme Hūṃ, part II"},
+            {"muSong_HelminthBoss", "Tlālōcān"},
+            {"muSong_HelminthRoost", "屋根の漏り (Yane No Mori)"},
+            {"muSong_Lakes&HabitatBoss", "A Tempestuous Noise of Thunder and Lightning Heard"},
+            {"muSong_LakesGameplay", "It Can't Rain All the Time"},
+            {"muSong_LemurianTemple", "Oṃ Maṇi Padme Hūṃ, part III"},
+            {"muSong_LemurianTempleBoss", "Forgot the Cry of Gulls"},
+            {"muSong_Meridian", "Oṃ Maṇi Padme Hūṃ, part I"},
+            {"muSong_MeridianFSB", "Oṃ Maṇi Padme Hūṃ, part I"},
+            {"muSong_Village", "I Should Build the Man a Statue"},
+            {"muSong_VillageBoss", "Forgot the Cry of Gulls"},
+        };
+
+        public static Dictionary<string, string> trackAuthors = new Dictionary<string, string>()
+        {
+
         };
     }
 }
