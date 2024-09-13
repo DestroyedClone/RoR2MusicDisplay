@@ -41,7 +41,7 @@ namespace RoR2MusicNotification
             {"muSong25", "You're Gonna Need A Bigger Ukulele"},
             {"muSong_Habitat", "Om Mani Padme Hum, part II"},
             //{"muSong_Habitat", "Oṃ Maṇi Padme Hūṃ, part II"},
-            {"muSong_HelminthBoss", "Tlālōcān"},
+            {"muSong_HelminthBoss", "Tlalocan"},
             //{"muSong_HelminthBoss", "Tlālōcān"},
             {"muSong_HelminthRoost", "屋根の漏り (Yane No Mori)"},
             {"muSong_Lakes&HabitatBoss", "A Tempestuous Noise of Thunder and Lightning Heard"},
