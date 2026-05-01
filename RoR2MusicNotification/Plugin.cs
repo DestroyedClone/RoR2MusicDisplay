@@ -31,7 +31,7 @@ namespace RoR2MusicNotification
             RoR2MusicNotification.ModConfig.Initialize(Config);
 
             On.RoR2.MusicTrackDef.Play += MusicTrackDef_Play;
-            UnityEngine.AddressableAssets.Addressables.LoadAssetAsync<GameObject>("RoR2/Base/UI/HGCreditNameLabel.prefab").Completed += (obj) => { ReferenceGameObject = obj.Result; };
+            UnityEngine.AddressableAssets.Addressables.LoadAssetAsync<GameObject>("RoR2/Base/UI/CreditsPanel/HGCreditNameLabel.prefab").Completed += (obj) => { ReferenceGameObject = obj.Result; };
             //MusicCatalogDumper.Hook();
             RoR2Application.onLoad += OnLoad;
         }
