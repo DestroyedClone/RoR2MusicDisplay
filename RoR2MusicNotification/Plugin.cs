@@ -98,8 +98,7 @@ namespace RoR2MusicNotification
                 return trackDefName switch
                 {
                     "muNone" => string.Empty,
-                    "muSong_Village" => trackName + "\nStavros Markonis",
-                    _ => trackName + "\nChris Christodoulou",
+                    _ => trackName + "\n" + Data.trackAuthors.GetValueOrDefault(trackDefName),
                 };
             }
             return trackDefName;
