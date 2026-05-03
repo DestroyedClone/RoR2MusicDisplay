@@ -14,7 +14,7 @@ using UnityEngine;
 
 namespace RoR2MusicNotification
 {
-    [BepInPlugin("com.DestroyedClone.MusicDisplay", "Music Display", "1.0.2")]
+    [BepInPlugin("com.DestroyedClone.MusicDisplay", "Music Display", "1.0.3")]
     [BepInDependency("com.rune580.riskofoptions", BepInDependency.DependencyFlags.SoftDependency)]
     public class Plugin : BaseUnityPlugin
     {
