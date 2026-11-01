@@ -15,6 +15,9 @@ namespace RoR2MusicNotification
             ModSettingsManager.AddOption(new IntFieldOption(ModConfig.cfgYHeight, false));
             ModSettingsManager.AddOption(new FloatFieldOption(ModConfig.cfgScale, false));
             ModSettingsManager.AddOption(new ChoiceOption(ModConfig.cfgTextAlignment, false));
+            ModSettingsManager.AddOption(new CheckBoxOption(ModConfig.cfgFadeToggle, false));
+            ModSettingsManager.AddOption(new FloatFieldOption(ModConfig.cfgFadeHoldDuration, false));
+            ModSettingsManager.AddOption(new FloatFieldOption(ModConfig.cfgFadeOutDuration, false));
         }
     }
 }

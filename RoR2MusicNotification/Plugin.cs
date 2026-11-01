@@ -1,6 +1,7 @@
 ﻿using BepInEx;
 using RoR2;
 using RoR2.UI;
+using System;
 using System.Security;
 using System.Security.Permissions;
 using UnityEngine;
@@ -58,6 +59,8 @@ namespace RoR2MusicNotification
                 notif = UnityEngine.Object.Instantiate(ReferenceGameObject);
                 notif.transform.parent = userCanvas.transform;
                 notif.name = "MusicNameDisplay";
+                MusicNotification_TextFadeOutController component = notif.AddComponent<MusicNotification_TextFadeOutController>();
+                MusicNotification_TextFadeOutController.instance = component;
             }
             //notif.AddComponent<FadeOutText>().textMesh = notif.GetComponent<HGTextMeshProUGUI>();
 
@@ -66,6 +69,7 @@ namespace RoR2MusicNotification
             SetNotifAlignment();
             SetNotifPosition();
             SetNotifScale();
+            SetFade();
         }
 
         public static void SetNotifAlignment()
@@ -102,20 +106,36 @@ namespace RoR2MusicNotification
             return trackDefName;
         }
 
-        private class FadeOutText : MonoBehaviour
+        internal static void SetFade()
         {
-            public float stopwatch = 0;
-            public float fadeDuration = 0;
+            if (!MusicNotification_TextFadeOutController.instance) return;
+            var instance = MusicNotification_TextFadeOutController.instance;
+            instance.holdStopwatch = 0;
+            instance.fadeOutStopwatch = 0;
+            instance.HoldDuration = ModConfig.cfgFadeHoldDuration.Value;
+            instance.FadeDuration = ModConfig.cfgFadeOutDuration.Value;
+            notifTextMesh.alpha = 1;
+            instance.enabled = ModConfig.cfgFadeToggle.Value;
+        }
 
-            public HGTextMeshProUGUI textMesh;
+        private class MusicNotification_TextFadeOutController : MonoBehaviour
+        {
+            public float holdStopwatch = 0;
+            public float fadeOutStopwatch = 0;
+            public float HoldDuration;
+            public float FadeDuration;
+
+            public static MusicNotification_TextFadeOutController instance;
 
             public void Update()
             {
-                stopwatch += Time.deltaTime;
-                if (stopwatch > fadeDuration)
-                {
-                    //Destroy(gameObject);
-                }
+                holdStopwatch += Time.deltaTime;
+                if (holdStopwatch < HoldDuration)
+                    return;
+                fadeOutStopwatch += Time.deltaTime;
+                if (fadeOutStopwatch > FadeDuration)
+                    return;
+                notifTextMesh.alpha = Mathf.Lerp(1, 0, fadeOutStopwatch / FadeDuration);
             }
         }
     }
