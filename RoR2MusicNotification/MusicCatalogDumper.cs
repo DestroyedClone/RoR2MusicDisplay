@@ -1,10 +1,6 @@
-﻿using BepInEx;
-using RoR2;
+﻿using RoR2;
 using System;
-using System.Collections.Generic;
 using System.Text;
-using System.Text.RegularExpressions;
-using UnityEngine;
 
 namespace RoR2MusicNotification
 {
@@ -20,12 +16,41 @@ namespace RoR2MusicNotification
         {
             StringBuilder sb = HG.StringBuilderPool.RentStringBuilder();
 
+            /* cachedName
+             * Actual Name
+             * Author
+             * Comment
+             * URL
+             * States
+             * Used as main track
+             * Used as boss track
+             */
             foreach (var track in RoR2.MusicTrackCatalog.musicTrackDefs)
             {
-                sb.Append($"{Environment.NewLine}\"{track.cachedName}\""); //name
+                sb.Append($"{Environment.NewLine}\"{track.cachedName}\""); //cachedName
+                if (Data.trackLists.ContainsKey(track.cachedName))
+                {
+                    sb.Append($"TAB\"{Data.trackLists[track.cachedName][0]}\""); //real name
+                } else
+                {
+                    sb.Append($"TAB\"songname\""); //fallback real name
+                }
+                if (Data.trackLists.ContainsKey(track.cachedName))
+                {
+                    sb.Append($"TAB\"{Data.trackLists[track.cachedName][1]}\""); //author
+                }
+                else
+                {
+                    sb.Append($"TAB\"author\""); //author
+                }
                 sb.Append($"TAB\"{track.comment}\""); //comment
-                sb.Append($"TAB\"url\""); //url
-                sb.Append($"TAB\"author\""); //author
+                if (SpreadsheetDataHelper.list.ContainsKey(track.cachedName))
+                {
+                    sb.Append($"TAB\"{SpreadsheetDataHelper.list[track.cachedName]}\""); //url
+                } else
+                {
+                    sb.Append($"TAB\"url\""); //url
+                }
                 var scenesWhereThisTrackIsMainTrack = " ";
                 var scenesWhereThisTrackIsBossTrack = " ";
                 //states

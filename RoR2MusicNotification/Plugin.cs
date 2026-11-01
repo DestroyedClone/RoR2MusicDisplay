@@ -1,16 +1,14 @@
 ﻿using BepInEx;
 using RoR2;
 using RoR2.UI;
-using System;
-using System.Collections.Generic;
 using System.Security;
 using System.Security.Permissions;
 using UnityEngine;
 
 [module: UnverifiableCode]
-#pragma warning disable CS0618 // Type or member is obsolete
+#pragma warning disable CS0618
 [assembly: SecurityPermission(SecurityAction.RequestMinimum, SkipVerification = true)]
-#pragma warning restore CS0618 // Type or member is obsolete
+#pragma warning restore CS0618
 
 namespace RoR2MusicNotification
 {
@@ -32,7 +30,7 @@ namespace RoR2MusicNotification
 
             On.RoR2.MusicTrackDef.Play += MusicTrackDef_Play;
             UnityEngine.AddressableAssets.Addressables.LoadAssetAsync<GameObject>("RoR2/Base/UI/CreditsPanel/HGCreditNameLabel.prefab").Completed += (obj) => { ReferenceGameObject = obj.Result; };
-            //MusicCatalogDumper.Hook();
+            MusicCatalogDumper.Hook();
             RoR2Application.onLoad += OnLoad;
         }
 
@@ -93,12 +91,12 @@ namespace RoR2MusicNotification
 
         public static string GetTrackInfo(string trackDefName)
         {
-            if (Data.trackNames.TryGetValue(trackDefName, out var trackName))
+            if (Data.trackLists.TryGetValue(trackDefName, out string[] trackInfo))
             {
-                return trackDefName switch
+                return trackInfo[0] switch
                 {
                     "muNone" => string.Empty,
-                    _ => trackName + "\n" + Data.trackAuthors.GetValueOrDefault(trackDefName),
+                    _ => $"{trackInfo[0]}\n{trackInfo[1]}"
                 };
             }
             return trackDefName;
