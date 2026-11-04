@@ -73,5 +73,14 @@ namespace RoR2MusicNotification
             {"muSong_Village", new string[]{"I Should Build the Man a Statue", "Stavros Markonis"}},
             {"muSong_VillageBoss", new string[]{"Forgot the Cry of Gulls", "Chris Christodoulou"}},
         };
+
+        public static Dictionary<string, string[]> trackListOverrides = new Dictionary<string, string[]>();
+
+        public enum TextAlignment
+        {
+            Left,
+            Center,
+            Right
+        }
     }
 }
