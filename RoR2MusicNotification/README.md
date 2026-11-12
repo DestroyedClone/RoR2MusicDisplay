@@ -12,8 +12,13 @@ Some tracks have been renamed in order to show correctly for the in-game font:
 
 ## Config
 * Change position, scale, and alignment
+* Text hold time, fade duration
+* Experimental track name replacement
 
 ## Mod Compat
 * Risk of Options
+
+## Special Thanks
+* FORCED_REASSEMBLY - Testing
 
 ![preview](https://raw.githubusercontent.com/DestroyedClone/RoR2MusicDisplay/master/RoR2MusicNotification/Preview.webp)
